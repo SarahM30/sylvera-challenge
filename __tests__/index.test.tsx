@@ -1,14 +1,28 @@
 import { render, screen } from '@testing-library/react'
-import Home from '@/pages/index'
+import ProjectHome from '@/pages/index'
 
-describe('Home', () => {
+describe('ProjectHome', () => {
   it('renders a heading', () => {
-    render(<Home />)
+    render(<ProjectHome />)
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
+    const headingRole = screen.getByRole('heading', { level: 1 });
+    expect(headingRole).toBeInTheDocument()
 
-    expect(heading).toBeInTheDocument()
+    const headingText = screen.getByText('Projects')
+    expect(headingText).toBeInTheDocument()
+  })
+
+  // Skipping as this will change with dynamic routes
+  it.skip('renders links for each project', () => {
+    render(<ProjectHome />)
+
+    const linkCardFoo = screen.getByTestId('linkCard - foo');
+    expect(linkCardFoo).toHaveAttribute('href', '/foo');
+
+    const linkCardBar = screen.getByTestId('linkCard - bar');
+    expect(linkCardBar).toHaveAttribute('href', '/bar');
+
+    const linkCardHello = screen.getByTestId('linkCard - hello');
+    expect(linkCardHello).toHaveAttribute('href', '/hello');
   })
 })
