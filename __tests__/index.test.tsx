@@ -1,14 +1,31 @@
-import { render, screen } from '@testing-library/react'
-import Home from '@/pages/index'
+import { render, screen } from "@testing-library/react";
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+import ProjectHome from "@/pages/index";
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
+const mockProjects = ["foo", "bar", "hello"];
 
-    expect(heading).toBeInTheDocument()
-  })
-})
+describe("ProjectHome", () => {
+  it("renders a heading", () => {
+    render(<ProjectHome projects={mockProjects} />);
+
+    const headingRole = screen.getByRole("heading", { level: 1 });
+    expect(headingRole).toBeInTheDocument();
+
+    const headingText = screen.getByText("Projects");
+    expect(headingText).toBeInTheDocument();
+  });
+
+  // Skipping as this will change with dynamic routes
+  it("renders links for each project", () => {
+    render(<ProjectHome projects={mockProjects}  />);
+
+    const linkCardFoo = screen.getByTestId("linkCard - foo");
+    expect(linkCardFoo).toHaveAttribute("href", "/foo");
+
+    const linkCardBar = screen.getByTestId("linkCard - bar");
+    expect(linkCardBar).toHaveAttribute("href", "/bar");
+
+    const linkCardHello = screen.getByTestId("linkCard - hello");
+    expect(linkCardHello).toHaveAttribute("href", "/hello");
+  });
+});
