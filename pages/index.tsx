@@ -1,27 +1,34 @@
 import Head from "next/head";
 
+import { PageContainer, Main, Heading } from "../styles/Common.styled";
+
 import {
-  PageContainer,
-  Main,
-  Heading,
   Description,
   Layout,
   LinkCard,
   ProjectTitle,
 } from "../styles/Projects.styled";
 
-const ProjectHome = () => {
-  const mockProjects: string[] = [
-    'foo', 
-    'bar', 
-    'hello'
-  ]
+// From the brief, the data is updated very infrequently
+export async function getStaticProps() {
+  const res = await fetch('https://pm25.lass-net.org/API-1.0.0/project/all/')
+  const projectList = await res.text()
+  const projects: string[] = projectList.split(/\s+/);
+  
+  return {
+    props: {
+      projects,
+    },
+  }
+}
 
-  const linkCards = mockProjects.map((project: string) => {
+// projects of type string[]
+const ProjectHome = ({ projects }) => {
+  const linkCards = projects.map((project: string) => {
     if (project == "") return null;
 
     return (
-      <LinkCard href="/ProjectDetails" key={project} data-testid={`linkCard - ${project}`}>
+      <LinkCard href={`/${project}`} key={project} data-testid={`linkCard - ${project}`}>
         <ProjectTitle>{project}</ProjectTitle>
       </LinkCard>
     );
@@ -35,7 +42,7 @@ const ProjectHome = () => {
       </Head>
       <Main>
         <Heading>Projects</Heading>
-        <Description>Page Description</Description>
+        <Description>List of projects</Description>
         <Layout>{linkCards}</Layout>
       </Main>
     </PageContainer>
