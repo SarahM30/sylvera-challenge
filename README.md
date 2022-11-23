@@ -18,3 +18,16 @@ Firstly clone the repository and then run the following commands in your termina
 yarn                                            # to install dependencies
 yarn dev                                        # to get the dev version up and running
 ```
+
+## Known issues to be resolved 
+
+- When navigating to a project page, there are console errors are "Error: Hydration failed because the initial UI does not match what was rendered on the server."
+- Some types missing 
+
+## Next Steps and Ideas
+
+- Implement caching 
+- Scale hero banner to be full width 
+- Align page styles/theme with hero banner 
+- Project feed entries being accordion components for user ease
+- Test error states 

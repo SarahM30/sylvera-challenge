@@ -1,11 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
-
-import hero from "../assets/hero.png";
 import { useRouter } from "next/router";
 
-import { PageContainer, Main, Heading } from "../styles/Common.styled";
+import hero from "../assets/hero.png";
 
+import { PageContainer, Main, Heading } from "../styles/Common.styled";
 import {
   Layout,
   Entry,

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import ProjectHome from "@/pages/index";
 
 const mockProjects = ["foo", "bar", "hello"];

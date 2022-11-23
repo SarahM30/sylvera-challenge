@@ -4,7 +4,6 @@ import Image from 'next/image';
 import hero from '../assets/hero.png'
 
 import { PageContainer, Main, Heading } from "../styles/Common.styled";
-
 import {
   Description,
   Layout,
