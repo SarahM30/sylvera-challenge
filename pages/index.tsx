@@ -1,4 +1,7 @@
 import Head from "next/head";
+import Image from 'next/image';
+
+import hero from '../assets/hero.png'
 
 import { PageContainer, Main, Heading } from "../styles/Common.styled";
 
@@ -41,6 +44,7 @@ const ProjectHome = ({ projects }) => {
         <meta name="description" content="Tech challenge - Sarah Muirhead" />
       </Head>
       <Main>
+        <Image src={hero} role="presentation" alt="Hero banner" />
         <Heading>Projects</Heading>
         <Description>List of projects</Description>
         <Layout>{linkCards}</Layout>

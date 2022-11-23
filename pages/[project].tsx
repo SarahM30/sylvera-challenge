@@ -1,4 +1,7 @@
 import Head from "next/head";
+import Image from "next/image";
+
+import hero from "../assets/hero.png";
 import { useRouter } from "next/router";
 
 import { PageContainer, Main, Heading } from "../styles/Common.styled";
@@ -55,8 +58,18 @@ const ProjectDetails = ({ projectDetails }) => {
   const projectTitle = router.asPath.replace(/\//g, "");
 
   const projectFeeds = projectDetails.feeds;
-  if (!projectFeeds) return <Heading>Sorry, no feeds for this project yet...</Heading>;
-  const mostRecentEntries = projectFeeds.slice(0, 10);
+  if (!projectFeeds)
+    return <Heading>Sorry, no feeds for this project yet...</Heading>;
+
+  
+  const orderedFeeds = projectFeeds.sort(function (a, b) {
+    return (
+      Date.parse("1970/01/01 " + a.time.slice(0, -2) + " " + a.time.slice(-2)) -
+      Date.parse("1970/01/01 " + b.time.slice(0, -2) + " " + b.time.slice(-2))
+    );
+  });
+
+  const mostRecentEntries = orderedFeeds.slice(0, 10);
 
   const feed = mostRecentEntries.map((entry: ProjectDetails) => {
     return (
@@ -97,6 +110,7 @@ const ProjectDetails = ({ projectDetails }) => {
         <meta name="description" content="Tech challenge - Sarah Muirhead" />
       </Head>
       <Main>
+        <Image src={hero} role="presentation" alt="Hero banner" />
         <Heading>Project: {projectTitle}</Heading>
         {feed.length > 0 ? (
           <>

@@ -6,7 +6,8 @@ export const PageContainer = styled.div`
 
 export const Main = styled.main`
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 0;
+  padding-bottom: 4rem;
   flex: 1;
   display: flex;
   flex-direction: column;
